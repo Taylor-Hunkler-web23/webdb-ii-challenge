@@ -26,4 +26,18 @@ router.post('/', (req, res) => {
         })
 });
 
+//PUT
+router.put('/:id', (req, res) => {
+    const changes = req.body;
+
+    carsdb('cars')
+    .where({id:req.params.id})
+    .update(changes)
+    .then(count => {
+            res.status(200).json(count);
+        }).catch(error => {
+            res.status(500).json({ error: 'Failed to update account' })
+        })
+});
+
 module.exports = router;
