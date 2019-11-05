@@ -55,4 +55,16 @@ router.delete('/:id', (req, res) => {
         })
 });
 
+//GET car by id
+router.get('/:id', (req, res) => {
+    carsdb.select('*').from('cars')
+    .where('id', '=', req.params.id)
+    .first()
+        .then(car => {
+            res.status(200).json(car)
+        }).catch(error => {
+            res.status(500).json({ error: 'Failed to get account' })
+        })
+});
+
 module.exports = router;
